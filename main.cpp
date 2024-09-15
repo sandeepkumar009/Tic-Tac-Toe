@@ -22,7 +22,7 @@ public:
         }
     }
 
-    bool check_winning(int x)
+    bool check_winning(int current_player)
     {
         if(current_screen[0] == current_screen[1] && current_screen[1] == current_screen[2]
         || current_screen[3] == current_screen[4] && current_screen[4] == current_screen[5]
@@ -33,7 +33,7 @@ public:
         || current_screen[0] == current_screen[4] && current_screen[4] == current_screen[8]
         || current_screen[2] == current_screen[4] && current_screen[4] == current_screen[6])
         {
-            cout<<players_name[x]<<" WON THE GAME:"<<endl;
+            cout<<players_name[current_player]<<" WON THE GAME:"<<endl;
             return true;
         }
         else
@@ -54,16 +54,16 @@ int main()
 
     p.display_current_screen();
 
-    int x=0, n;
+    int current_player=0, n;
     while(1)
     {
-        x = (x+1)%2;
-        cout<<p.players_name[x]<<" choise: ";
+        cout<<p.players_name[current_player]<<" choise: ";
         cin>>n;
-        p.current_screen[n-1] = p.mark[x];
+        p.current_screen[n-1] = p.mark[current_player];
 
         p.display_current_screen();
-        if(p.check_winning(x))
+        if(p.check_winning(current_player))
             break;
+        current_player = (current_player+1)%2;
     }
 }
